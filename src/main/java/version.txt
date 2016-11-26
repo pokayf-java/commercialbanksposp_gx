@@ -1,5 +1,5 @@
-Version:V3.0.1
+Version:V3.0.2
 Province:GX
 City:NN
 Data:Oracle
-Build:2016-11-11
+Build:2016-11-26
