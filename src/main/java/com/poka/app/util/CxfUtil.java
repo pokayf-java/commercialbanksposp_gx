@@ -7,7 +7,6 @@ import java.util.Properties;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
-import org.apache.cxf.interceptor.MessageSenderInterceptor;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.apache.cxf.transport.Conduit;
 import org.apache.cxf.transport.http.HTTPConduit;
@@ -72,6 +71,5 @@ public class CxfUtil {
 	public  String getUrl(){
 	   return p.getProperty("url");
 	}
-	
 	
 }

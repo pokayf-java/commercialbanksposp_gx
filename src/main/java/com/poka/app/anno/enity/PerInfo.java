@@ -5,14 +5,14 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "PERINFO")
+@IdClass(PerInfoPK.class)
 public class PerInfo implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = -5657632870579719970L;
 	
 	private String percode;
@@ -24,9 +24,10 @@ public class PerInfo implements Serializable {
 	private String brand;
 	private String model;
 	private String quality;
+	private String useStatus;
 
 	@Id
-	@Column(name = "percode", length = 24)
+	@Column(name = "PERCODE", length = 24)
 	public String getPercode() {
 		return percode;
 	}
@@ -35,7 +36,7 @@ public class PerInfo implements Serializable {
 		this.percode = percode;
 	}
 
-	@Column(name = "pertype", length = 2)
+	@Column(name = "PERTYPE", length = 2)
 	public String getPertype() {
 		return pertype;
 	}
@@ -44,7 +45,8 @@ public class PerInfo implements Serializable {
 		this.pertype = pertype;
 	}
 
-	@Column(name = "bankno", length = 20)
+	@Id
+	@Column(name = "BANKNO", length = 20)
 	public String getBankno() {
 		return bankno;
 	}
@@ -53,7 +55,8 @@ public class PerInfo implements Serializable {
 		this.bankno = bankno;
 	}
 
-	@Column(name = "agencyno", length = 20)
+	@Id
+	@Column(name = "AGENCYNO", length = 20)
 	public String getAgencyno() {
 		return agencyno;
 	}
@@ -62,7 +65,7 @@ public class PerInfo implements Serializable {
 		this.agencyno = agencyno;
 	}
 
-	@Column(name = "acctaddr", length = 200)
+	@Column(name = "ACCTADDR", length = 200)
 	public String getAcctaddr() {
 		return acctaddr;
 	}
@@ -71,7 +74,7 @@ public class PerInfo implements Serializable {
 		this.acctaddr = acctaddr;
 	}
 
-	@Column(name = "status", length = 1)
+	@Column(name = "STATUS", length = 1)
 	public Character getStatus() {
 		return status;
 	}
@@ -80,7 +83,7 @@ public class PerInfo implements Serializable {
 		this.status = status;
 	}
 
-	@Column(name = "brand", length = 50)
+	@Column(name = "BRAND", length = 50)
 	public String getBrand() {
 		return brand;
 	}
@@ -89,7 +92,7 @@ public class PerInfo implements Serializable {
 		this.brand = brand;
 	}
 
-	@Column(name = "model", length = 100)
+	@Column(name = "MODEL", length = 100)
 	public String getModel() {
 		return model;
 	}
@@ -98,13 +101,22 @@ public class PerInfo implements Serializable {
 		this.model = model;
 	}
 
-	@Column(name = "quality", length = 100)
+	@Column(name = "QUALITY", length = 100)
 	public String getQuality() {
 		return quality;
 	}
 
 	public void setQuality(String quality) {
 		this.quality = quality;
+	}
+
+	@Column(name = "USESTATUS", length = 1)
+	public String getUseStatus() {
+		return useStatus;
+	}
+
+	public void setUseStatus(String useStatus) {
+		this.useStatus = useStatus;
 	}
 
 }

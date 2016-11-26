@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
@@ -15,7 +13,7 @@ import javax.persistence.Table;
 @IdClass(value = PayOrderDetailPK.class)
 public class PayOrderDetail implements Serializable {
 	
-	private Integer id;
+//	private Integer id;
 	private String detailId;
 	private String provId;
 	private String unitId;
@@ -30,21 +28,21 @@ public class PayOrderDetail implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "PayOrderDetail [id=" + id + ", detailId=" + detailId
+		return "PayOrderDetail [detailId=" + detailId
 				+ ", provId=" + provId + ", unitId=" + unitId + ", orderId="
 				+ orderId + ", currencyId=" + currencyId + ", currencyKind="
 				+ currencyKind + ", currencyMoney=" + currencyMoney
 				+ ", bagCount=" + bagCount + ", bundleCount=" + bundleCount
 				+ ", detailState=" + detailState + "]";
 	}
-	@Id
-	@Column(name = "Did")
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	@Id
+//	@Column(name = "Did")
+//	public Integer getId() {
+//		return id;
+//	}
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 	
 	@Column(name = "DetailId",length=20)
 	public String getDetailId() {

@@ -2,37 +2,51 @@ package com.poka.app.quartz;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.poka.app.anno.bussiness.AppointmentBussiness;
-import com.poka.app.anno.bussiness.PaymentBussiness;
-import com.poka.app.anno.bussiness.QryApplyBussiness;
-import com.poka.app.anno.enity.QryApply;
+import com.poka.app.anno.bussiness.AppointmentBusiness;
+import com.poka.app.anno.bussiness.PaymentBusiness;
+import com.poka.app.anno.bussiness.QryApplyBusiness;
+import com.poka.app.util.ConstantUtil;
 
+/**
+ * 预约交取款、查询申请定时任务类
+ * @author Administrator
+ *
+ */
 
-public class QuartzJob  {
+public class QuartzJob {
+
+	AppointmentBusiness appointmentBussiness;
+	PaymentBusiness paymentBussiness;
+	QryApplyBusiness qryApplyBussiness;
 	
-	AppointmentBussiness appointmentBussiness;
-	PaymentBussiness paymentBussiness;
-	QryApplyBussiness qryApplyBussiness;
-	
+
 	@Autowired
-	public void setPaymentBussiness(PaymentBussiness paymentBussiness) {
+	public void setPaymentBussiness(PaymentBusiness paymentBussiness) {
 		this.paymentBussiness = paymentBussiness;
 	}
-	
+
 	@Autowired
-	public void setQryApplyBussiness(QryApplyBussiness qryApplyBussiness) {
+	public void setQryApplyBussiness(QryApplyBusiness qryApplyBussiness) {
 		this.qryApplyBussiness = qryApplyBussiness;
 	}
 
 	@Autowired
-	public void setAppointmentBussiness(AppointmentBussiness appointmentBussiness) {
+	public void setAppointmentBussiness(AppointmentBusiness appointmentBussiness) {
 		this.appointmentBussiness = appointmentBussiness;
 	}
 
 	public void work() {
-		appointmentBussiness.makeAppointment();
-		paymentBussiness.makePayment();
-		qryApplyBussiness.makeQryApply();
+		
+		if(ConstantUtil.appointmentFlag.trim().equals("Enabled")){
+			appointmentBussiness.makeAppointment();
+		}
+		if(ConstantUtil.paymentFlag.trim().equals("Enabled")){
+			paymentBussiness.makePayment();
+		}
+		if(ConstantUtil.qryApplyFlag.trim().equals("Enabled")){
+			qryApplyBussiness.makeQryApply();
+		}
+		
 	}
 
 }

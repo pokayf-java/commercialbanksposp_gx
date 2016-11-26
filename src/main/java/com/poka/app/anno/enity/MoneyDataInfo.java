@@ -1,7 +1,5 @@
 package com.poka.app.anno.enity;
 
-import javax.persistence.Entity;
-
 
 public class MoneyDataInfo {
 

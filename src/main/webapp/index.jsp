@@ -1,5 +1,7 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<body>
-<h2>Hello World!</h2>
-</body>
+  <body>
+  	<jsp:forward page="/GZHQueryServlet?method=toLoginJsp&login=true"/>
+  </body>
 </html>

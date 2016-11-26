@@ -1,26 +1,19 @@
 package com.poka.app.anno.enity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.poka.app.enumtype.BooleanEnum;
-import com.poka.app.enumtype.OrderKind;
 import com.poka.app.enumtype.StateType;
 
 @Entity
@@ -28,7 +21,7 @@ import com.poka.app.enumtype.StateType;
 @IdClass(value=PayOrderPK.class)
 public class PayOrder implements Serializable {
 	
-	private Integer id;
+//	private Integer id;
 	private String provId;
 	private String unitId;
 	private String orderId;
@@ -50,7 +43,7 @@ public class PayOrder implements Serializable {
 	
 @Override
 	public String toString() {
-		return "PayOrder [id=" + id + ", provId=" + provId + ", unitId="
+		return "PayOrder [provId=" + provId + ", unitId="
 				+ unitId + ", orderId=" + orderId + ", sourceId=" + sourceId
 				+ ", fromProvId=" + fromProvId + ", fromUnitId=" + fromUnitId
 				+ ", orderDate=" + orderDate + ", bussinessDate="
@@ -90,15 +83,15 @@ public class PayOrder implements Serializable {
 //	}
 //	
 //	
-	@Id
-	@Column(name = "Did")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	@Id
+//	@Column(name = "Did")
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	public Integer getId() {
+//		return id;
+//	}
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 	
 	@Id
 	@Column(name = "ProvId",length=2)

@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
@@ -23,7 +21,7 @@ import com.poka.app.enumtype.BooleanEnum;
 @IdClass(value = PayBundlePK.class)
 public class PayBundle implements Serializable {
 
-	private Integer id;
+//	private Integer id;
 	private String provId;
 	private String unitId;
 	private String bundleCode;
@@ -51,7 +49,7 @@ public class PayBundle implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "PayBundle [id=" + id + ", provId=" + provId + ", unitId="
+		return "PayBundle [provId=" + provId + ", unitId="
 				+ unitId + ", bundleCode=" + bundleCode + ", orderId="
 				+ orderId + ", bagCode=" + bagCode + ", currencyId="
 				+ currencyId + ", currencyKind=" + currencyKind
@@ -64,15 +62,15 @@ public class PayBundle implements Serializable {
 				+ ", state=" + state + ", areaCode=" + areaCode + ", isOk="
 				+ isOk + "]";
 	}
-	@Id
-	@Column(name = "Did")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	@Id
+//	@Column(name = "Did")
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	public Integer getId() {
+//		return id;
+//	}
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 	
 	@Id
 	@Column(name = "ProvId",length=2)

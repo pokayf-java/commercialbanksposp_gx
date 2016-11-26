@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
@@ -21,7 +19,7 @@ import com.poka.app.enumtype.BooleanEnum;
 @Table(name = "TMP_BAGS")
 @IdClass(value = PayBagPK.class)
 public class PayBag implements Serializable {
-	private Integer id;
+//	private Integer id;
 	private String provId;
 	private String unitId;
 	private String bagCode;
@@ -50,7 +48,7 @@ public class PayBag implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "PayBag [id=" + id + ", provId=" + provId + ", unitId=" + unitId
+		return "PayBag [provId=" + provId + ", unitId=" + unitId
 				+ ", bagCode=" + bagCode + ", orderId=" + orderId
 				+ ", detailId=" + detailId + ", currencyId=" + currencyId
 				+ ", currencyKind=" + currencyKind + ", bagMoney=" + bagMoney
@@ -63,14 +61,14 @@ public class PayBag implements Serializable {
 				+ writeCount + ", dealScanID=" + dealScanID + ", isOk=" + isOk
 				+ "]";
 	}
-	@Id
-	@Column(name = "Did")
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	@Id
+//	@Column(name = "Did")
+//	public Integer getId() {
+//		return id;
+//	}
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 	
 	@Id
 	@Column(name = "ProvId",length=2)

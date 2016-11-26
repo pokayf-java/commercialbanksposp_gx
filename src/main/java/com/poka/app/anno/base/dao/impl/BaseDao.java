@@ -21,7 +21,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import com.poka.app.anno.base.dao.IBaseDao;
-import com.poka.app.anno.enity.ReserveDetail;
 import com.poka.app.util.ReflectUtils;
 
 @Repository

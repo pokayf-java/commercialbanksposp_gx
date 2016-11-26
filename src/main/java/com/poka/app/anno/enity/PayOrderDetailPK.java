@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 public class PayOrderDetailPK implements Serializable {
-	private Integer id;
+//	private Integer id;
 	private String provId;
 	private String unitId;
 	private String orderId;
@@ -19,8 +19,8 @@ public class PayOrderDetailPK implements Serializable {
 	public boolean equals(Object obj){
 		if(obj instanceof PayOrderDetailPK){
 			PayOrderDetailPK pk = (PayOrderDetailPK)obj;
-			if(pk.getId() == this.id 
-					&& pk.getProvId().equals(this.getProvId())
+//			if(pk.getId() == this.id 
+			if(pk.getProvId().equals(this.getProvId())
 					&& pk.getOrderId().equals(this.getOrderId())
 					&& pk.getUnitId().equals(this.getUnitId())
 					&& pk.getCurrencyId().equals(this.getCurrencyId())
@@ -36,15 +36,15 @@ public class PayOrderDetailPK implements Serializable {
 		return this.getOrderId().hashCode();
 	}
 	
-	@Id
-	@Column(name = "Did")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	@Id
+//	@Column(name = "Did")
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	public Integer getId() {
+//		return id;
+//	}
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 	
 	
 	@Column(name = "ProvId",length=2)

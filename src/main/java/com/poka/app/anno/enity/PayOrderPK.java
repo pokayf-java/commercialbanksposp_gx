@@ -9,21 +9,21 @@ import javax.persistence.Id;
 
 public class PayOrderPK implements Serializable {
 
-	private Integer id;
+//	private Integer id;
 	private String provId;
 	private String unitId;
 	private String orderId;
 	
-	@Id
-	@Column(name = "Did")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	@Id
+//	@Column(name = "Did")
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	public Integer getId() {
+//		return id;
+//	}
+//
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
 
 	@Column(name = "ProvId",length=2)
@@ -59,8 +59,8 @@ public class PayOrderPK implements Serializable {
 	public boolean equals(Object obj){
 		if(obj instanceof PayOrderPK){
 			PayOrderPK pk = (PayOrderPK)obj;
-			if(pk.getId() == this.id 
-					&& pk.getProvId().equals(this.getProvId())
+//			if(pk.getId() == this.id 
+			if(pk.getProvId().equals(this.getProvId())
 					&& pk.getOrderId().equals(this.getOrderId())
 					&& pk.getUnitId().equals(this.getUnitId())){
 				return true;

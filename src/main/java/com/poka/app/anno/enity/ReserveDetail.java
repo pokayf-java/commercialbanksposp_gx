@@ -1,7 +1,6 @@
 package com.poka.app.anno.enity;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

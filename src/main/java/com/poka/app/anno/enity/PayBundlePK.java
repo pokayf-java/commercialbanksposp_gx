@@ -3,12 +3,9 @@ package com.poka.app.anno.enity;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 public class PayBundlePK implements Serializable {
-	private Integer id;
+//	private Integer id;
 	private String provId;
 	private String unitId;
 	private String bundleCode;
@@ -18,8 +15,8 @@ public class PayBundlePK implements Serializable {
 	public boolean equals(Object obj){
 		if(obj instanceof PayBundlePK){
 			PayBundlePK pk = (PayBundlePK)obj;
-			if(pk.getId() == this.id 
-					&& pk.getProvId().equals(this.getProvId())
+//			if(pk.getId() == this.id 
+			if(pk.getProvId().equals(this.getProvId())
 					&& pk.getOrderId().equals(this.getOrderId())
 					&& pk.getUnitId().equals(this.getUnitId())
 					&& pk.getBundleCode().equals(this.getBundleCode())){
@@ -34,15 +31,15 @@ public class PayBundlePK implements Serializable {
 		return this.getOrderId().hashCode();
 	}
 	
-	@Id
-	@Column(name = "Did")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+//	@Id
+//	@Column(name = "Did")
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	public Integer getId() {
+//		return id;
+//	}
+//	public void setId(Integer id) {
+//		this.id = id;
+//	}
 
 	@Column(name = "ProvId",length=2)
 	public String getProvId() {
