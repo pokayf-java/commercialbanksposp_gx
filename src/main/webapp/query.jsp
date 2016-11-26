@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var dealNo = (document.getElementById("dealNo").value).replace(/\s+/g,""); 
 			document.getElementById("dealNo").value = dealNo;
 	  	 	var errInfo = document.getElementById("errorInfo");
-	  	 	
+	  	 	var bannerDiv = document.getElementById("bannerDiv");
 			if(dealNo == ""){
 				errInfo.innerHTML = "<font style='color:red; font-size:12px;'>冠字号码不能为空，请输入！</font>";
 				document.getElementById("dealNo").focus();
@@ -189,7 +189,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							document.getElementById("search").disabled = false;
 							document.getElementById("running").style.display = 'none';
 							
-							var bannerDiv = document.getElementById("bannerDiv");
 							var contentDiv =  document.getElementById("contentDiv");
 							var form =  document.getElementById("form");
 							if(resultStrLength > 130){
@@ -200,12 +199,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							}
 							
 							if(resultStrLength < 130){
-								contentDiv.style.height = "400px";
-								bannerDiv.style.height = "650px";
+								contentDiv.style.height = "300px";
+								bannerDiv.style.height = "550px";
 								form.style.cssText = "padding-top: 50px;"
 							}
 							errInfo.innerHTML = "<font style='color:#999999; font-size:13px;'>系统帮您查找到</font>"+resultStrLength+"<font style='color:#999999; font-size:13px;'>条相关记录</font>";
 						}else{
+							bannerDiv.style.height = "550px";
 							resultDiv.innerHTML = "<font style='color:#0000FF; font-size:25px;'>对不起，您要查找的冠字号码不存在！</font>";
 							resultDiv.style.display = 'block';
 							document.getElementById("search").disabled = false;
@@ -228,7 +228,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	<body>
 	<input type="hidden" value=${login }  id = "login" name="login"/>
-			<div style="border: 1px solid graytext; background: url('${pageContext.request.contextPath}/style/blue/images/banner.jpg') repeat-x ; height: 600px;" id="bannerDiv" >
+			<div style="border: 1px solid graytext; background: url('${pageContext.request.contextPath}/style/blue/images/banner.jpg') repeat-x ; height: 550px;" id="bannerDiv" >
 				<div  style="padding-top: 15px;">
 					<h1 ><font size="6"  color="#FFFFFF" face="微软雅黑">&nbsp;POKA&nbsp;</font><font size="4"  color="#FFFFFF"  face="华文楷体">人民币冠字号码查询信息管理系统欢迎您</font></h1>
 				</div>
