@@ -67,7 +67,7 @@ public class CxfUtil {
 	        return (T)factoryBean.create();
 	}
 	
-
+	//从配置文件中获取人行url地址
 	public  String getUrl(){
 	   return p.getProperty("url");
 	}

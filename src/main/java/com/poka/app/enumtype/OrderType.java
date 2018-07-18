@@ -1,7 +1,7 @@
 package com.poka.app.enumtype;
 
 public enum OrderType {
-	 APPOINTMENT(0)/*预约取款*/,PAYMENT(1)/*交款*/,APPLICATION(2)/*查询申请*/;
+	 APPOINTMENT(0)/*预约取款*/,PAYMENT(1)/*交款*/,APPLICATION(2)/*查询申请*/,CANCELORDER(3)/*交款退回*/;
 	 
 	 private int nCode;
 

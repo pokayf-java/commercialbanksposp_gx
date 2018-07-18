@@ -41,8 +41,8 @@
 		<!-- 设置连接池初始值 -->
 		<property name="initialPoolSize" value="5" />
 		<property name="checkoutTimeout" value="20000" />
-		<property name="testConnectionOnCheckin" value="true"/>
-		<property name="idleConnectionTestPeriod" value="60"/>
+		<property name="testConnectionOnCheckin" value="true" />
+		<property name="idleConnectionTestPeriod" value="60" />
 	</bean>
 
 	<!-- 配置sessionFactory -->
@@ -55,8 +55,8 @@
 		<property name="hibernateProperties">
 			<value>
 				<!-- 设置数据库方言 -->
-				hibernate.dialect=org.hibernate.dialect.MySQLDialect
-				<!-- 设置自动创建|更新|验证数据库表结构 validate-->
+				hibernate.dialect=org.hibernate.dialect.OracleDialect
+				<!-- 设置自动创建|更新|验证数据库表结构 validate -->
 				hibernate.hbm2ddl.auto= update
 				<!-- 是否在控制台显示sql -->
 				hibernate.show_sql=true
@@ -133,14 +133,14 @@
 
 
 	<!-- 要调用的工作类(quartzJob是com.kay.quartz.QuartzJob的实例化) -->
-	
+
 	<bean id="quartzJob" class="com.poka.app.quartz.QuartzJob"></bean>
 	<bean id="perinfoAndBranchInfoJob" class="com.poka.app.quartz.PerinfoAndBranchInfoJob"></bean>
 	<bean id="bankAndNetRepJob" class="com.poka.app.quartz.BankAndNetRepJob"></bean>
 	<bean id="doProduceJob" class="com.poka.app.quartz.DoProduceJob"></bean>
 	<bean id="doDeleteLogsJob" class="com.poka.app.quartz.DoDeleteLogsJob"></bean>
 	<bean id="doBagInfoJob" class="com.poka.app.quartz.DoBagInfoJob"></bean>
-	
+
 	<!-- 定义调用对象和调用对象的方法 -->
 
 
@@ -149,13 +149,13 @@
 		<property name="targetObject" ref="quartzJob" />
 		<property name="targetMethod" value="work" />
 	</bean>
-	
+
 	<bean id="jobDoBagInfoDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="doBagInfoJob" />
 		<property name="targetMethod" value="work" />
 	</bean>
-	
+
 	<bean id="jobDoDelLogsDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="doDeleteLogsJob" />
@@ -166,23 +166,23 @@
 		<property name="targetObject" ref="doProduceJob" />
 		<property name="targetMethod" value="work" />
 	</bean>
-	
+
 	<bean id="jobPbDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="perinfoAndBranchInfoJob" />
 		<property name="targetMethod" value="work" />
 	</bean>
-	
+
 	<bean id="jobBankAndNetRepJobDetail"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject" ref="bankAndNetRepJob" />
 		<property name="targetMethod" value="work" />
 	</bean>
 
-	<!-- 定义触发时间  SimpleTriggerFactoryBean-->
-	<!--  "0 0 12 * * ?" 每天中午12点触发 -->
+	<!-- 定义触发时间 SimpleTriggerFactoryBean -->
+	<!-- "0 0 12 * * ?" 每天中午12点触发 -->
 	<!--"0 15 10 ? * *" 每天上午10:15触发 -->
-	<!--"0 15 10 * * ?" 每天上午10:15触发-->
+	<!--"0 15 10 * * ?" 每天上午10:15触发 -->
 	<bean id="simpleTrigger"
 		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
 		<!-- see the example of method invoking job above -->
@@ -192,7 +192,7 @@
 		<!--每5分钟执行一次 -->
 		<property name="repeatInterval" value="300000" />
 	</bean>
-	
+
 	<bean id="bankAndNetRepTrigger"
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<!-- see the example of method invoking job above -->
@@ -202,7 +202,7 @@
 		<!--每天凌晨3点执行 -->
 		<property name="cronExpression" value="0 0 3 * * ?"></property>
 	</bean>
-	
+
 	<bean id="doBagInfoTrigger"
 		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
 		<!-- see the example of method invoking job above -->
@@ -212,7 +212,7 @@
 		<!--每5分钟执行一次 -->
 		<property name="repeatInterval" value="300000" />
 	</bean>
-	
+
 	<bean id="doDelLogsTrigger"
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<!-- see the example of method invoking job above -->
@@ -222,7 +222,7 @@
 		<!-- 每月最后一天的凌晨五点执行 -->
 		<property name="cronExpression" value="0 0 5 L * ?"></property>
 	</bean>
-	
+
 	<bean id="doProTrigger"
 		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<!-- see the example of method invoking job above -->
@@ -241,24 +241,24 @@
 		<!-- 每天凌晨2点执行 -->
 		<property name="cronExpression" value="0 0 2 * * ?"></property>
 	</bean>
-	
+
 	<bean id="startQuertz" lazy-init="false" autowire="no"
 		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref bean="simpleTrigger"/>
-				<ref bean="pbTrigger"/>
-				<ref bean="bankAndNetRepTrigger"/>
-				<ref bean="doProTrigger"/>
-				<ref bean="doDelLogsTrigger"/>
-				<ref bean="doBagInfoTrigger"/>
+				<ref bean="simpleTrigger" />
+				<ref bean="pbTrigger" />
+				<ref bean="bankAndNetRepTrigger" />
+				<ref bean="doProTrigger" />
+				<ref bean="doDelLogsTrigger" />
+				<ref bean="doBagInfoTrigger" />
 			</list>
 		</property>
 		<property name="jobFactory">
 			<bean class="com.poka.app.util.PokaSpringBeanJobFactory" />
 		</property>
 	</bean>
-	
+
 	<bean id="cBPospSW" class="com.poka.app.cb.ws.impl.CBPospSW"></bean>
 	<jaxws:endpoint id="cbPospService" implementor="#cBPospSW"
 		address="/cbService">
@@ -269,7 +269,7 @@
 			<bean class="org.apache.cxf.interceptor.LoggingOutInterceptor" />
 		</jaxws:outInterceptors>
 	</jaxws:endpoint>
-	
+
 	<!-- 工具bean -->
 	<bean id="cxfUtil" class="com.poka.app.util.CxfUtil"></bean>
 </beans>  

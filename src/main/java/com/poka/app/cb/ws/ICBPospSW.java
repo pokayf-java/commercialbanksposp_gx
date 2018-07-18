@@ -7,6 +7,7 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 
+import com.poka.app.anno.enity.BagInfo;
 import com.poka.app.anno.enity.BankCheckDailyRep;
 import com.poka.app.anno.enity.BankCheckDailyRepList;
 import com.poka.app.anno.enity.MonRule;
@@ -63,5 +64,10 @@ public interface ICBPospSW {
 	@WebMethod(operationName = "selectGZHData")
 	@WebResult(name = "result")
 	public List<MoneyDataInfo> selectGZHData(@WebParam(name = "mon") String mon);
+	
+	/*取款信息下发商行*/
+	@WebMethod(operationName = "sendBagInfoData")
+	@WebResult(name = "result")
+	public boolean sendBagInfoData(@WebParam(name = "bagInfoList") List<BagInfo> bagInfoList);
 
 }

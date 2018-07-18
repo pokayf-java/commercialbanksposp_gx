@@ -17,7 +17,10 @@ import javax.persistence.TemporalType;
 
 import com.poka.app.enumtype.OrderType;
 import com.poka.app.enumtype.StateType;
-
+/**
+ * 订单信息的实体类
+ *
+ */
 @Entity
 @Table(name = "T_ORDERINFO")
 public class OrderInfo implements Serializable {

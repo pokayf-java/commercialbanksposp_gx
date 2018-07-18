@@ -35,7 +35,18 @@ public interface IPBPospSW {
 	@WebMethod(operationName = "makePayment")
 	@WebResult(name = "result")
 	public boolean makePayment(@WebParam(name = "payment") PaymentVo payment);
-
+	
+	/**
+	 * 2017年6月22日
+	 * @author Enma.ai
+	 * @return boolean
+	 * @param paymentVo
+	 */
+	/*交款退回*/
+	@WebMethod(operationName = "cancelOrder")
+	@WebResult(name = "result")
+	public boolean cancelOrder(@WebParam(name = "canOrder") String orderId); 
+	
 	/*查询申请*/
 	@WebMethod(operationName = "makeQryApply")
 	@WebResult(name = "result")

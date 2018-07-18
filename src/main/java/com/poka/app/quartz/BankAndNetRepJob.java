@@ -20,7 +20,7 @@ public class BankAndNetRepJob {
 	}
 
 	public void work() {
-		
+		//如果需要上传这些数据（即判定为enable）
 		if(ConstantUtil.bankAndNetRepFlag.equals("Enabled")){
 			bankAndNetRepBussiness.sendBankCheckRepList();
 			bankAndNetRepBussiness.sendNetCheckRepList();

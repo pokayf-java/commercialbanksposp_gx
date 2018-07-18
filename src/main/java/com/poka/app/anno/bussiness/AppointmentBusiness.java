@@ -18,8 +18,14 @@ import com.poka.app.util.CxfUtil;
 import com.poka.app.vo.AppointmenResult;
 import com.poka.app.vo.AppointmentVo;
 
+/**
+ * 
+ * 预约业务类
+ * 
+ */
 @Component
 public class AppointmentBusiness {
+	//日志类logger，用于记录该方法的日志文件
 	Logger logger = Logger.getLogger(AppointmentBusiness.class);
 	private OrderInfoService orderInfoService;
 

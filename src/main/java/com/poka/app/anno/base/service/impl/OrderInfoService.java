@@ -74,6 +74,7 @@ public class OrderInfoService extends BaseService<OrderInfo, Integer> {
 		String hql = "from OrderInfo o where o.orderType = :orderType and o.state=0";
 		Map<String, OrderType> map = new HashMap();
 		map.put("orderType", type);
+		//根据hql返回一个list<OrderInfo>
 		return this.getBaseDao().find(hql,map);
 	}
 	
@@ -88,6 +89,11 @@ public class OrderInfoService extends BaseService<OrderInfo, Integer> {
 		return vo;
 	}
 	
+	/**
+	 * 获取预约结果
+	 * @param orderId
+	 * @return 返回一个AppointmentResult
+	 */
 	public AppointmenResult getAppointmenResult(String orderId){
 		AppointmenResult vo = new AppointmenResult();
 		String hql = "from ReserveMain r where r.rsvNo=:orderId";
@@ -100,6 +106,11 @@ public class OrderInfoService extends BaseService<OrderInfo, Integer> {
 		return vo;
 	}
 	
+	/**
+	 * 更新订单信息状态
+	 * @param order
+	 * @param state
+	 */
 	public void updateOrderInfoState(OrderInfo order,StateType state){
 //		String hql = " update OrderInfo o set o.state=:state where o.orderId=:orderId and o.orderType=:orderType  ";
 		String hql = " update OrderInfo o set o.state=:state, o.finishDate=:finishDate where o.orderId=:orderId and o.orderType=:orderType";
@@ -111,6 +122,11 @@ public class OrderInfoService extends BaseService<OrderInfo, Integer> {
 		this.getBaseDao().batchExecute(hql,map);
 	}
 	
+	/**
+	 * 保存预约结果
+	 * @param appointment
+	 * @return boolean
+	 */
 	public boolean saveAppointmentResult(AppointmenResult appointment){
 		if(appointment == null)return false;
 		String hql = "from ReserveMain r where r.rsvNo=:orderId";
@@ -124,6 +140,13 @@ public class OrderInfoService extends BaseService<OrderInfo, Integer> {
 		return true;
 	}
 	
+	/**
+	 * 
+	 * 2017年6月20日
+	 * @return PaymentVo
+	 * @param orderId
+	 * 
+	 */
 	public PaymentVo getPaymentVo(String orderId){
 		PaymentVo vo = new PaymentVo();
 		String hql = "from PayOrder r where r.orderId=:orderId";

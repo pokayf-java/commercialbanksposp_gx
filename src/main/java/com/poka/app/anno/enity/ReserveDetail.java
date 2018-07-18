@@ -18,6 +18,7 @@ public class ReserveDetail implements Serializable {
 	private String moneyId;
 	private String moneyName;
 	private Double rsvSum;
+	//卷种
 	private String moneyBad;
 	
 	@Override

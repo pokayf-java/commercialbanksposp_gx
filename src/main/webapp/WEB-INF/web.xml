@@ -42,4 +42,12 @@
 		<servlet-name>GZHQueryServlet</servlet-name>
 		<url-pattern>/GZHQueryServlet</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>PopupServlet</servlet-name>
+		<servlet-class>com.poka.app.anno.servlet.PopupServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PopupServlet</servlet-name>
+		<url-pattern>/PopupServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

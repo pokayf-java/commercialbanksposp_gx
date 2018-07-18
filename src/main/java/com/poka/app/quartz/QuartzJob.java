@@ -3,6 +3,7 @@ package com.poka.app.quartz;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.poka.app.anno.bussiness.AppointmentBusiness;
+import com.poka.app.anno.bussiness.CancelOrderBusiness;
 import com.poka.app.anno.bussiness.PaymentBusiness;
 import com.poka.app.anno.bussiness.QryApplyBusiness;
 import com.poka.app.util.ConstantUtil;
@@ -18,8 +19,13 @@ public class QuartzJob {
 	AppointmentBusiness appointmentBussiness;
 	PaymentBusiness paymentBussiness;
 	QryApplyBusiness qryApplyBussiness;
+	CancelOrderBusiness cancelOrdderBusiness;
 	
-
+	@Autowired
+	public void setCancelOrdderBusiness(CancelOrderBusiness cancelOrdderBusiness) {
+		this.cancelOrdderBusiness = cancelOrdderBusiness;
+	}
+	
 	@Autowired
 	public void setPaymentBussiness(PaymentBusiness paymentBussiness) {
 		this.paymentBussiness = paymentBussiness;
@@ -42,6 +48,8 @@ public class QuartzJob {
 		}
 		if(ConstantUtil.paymentFlag.trim().equals("Enabled")){
 			paymentBussiness.makePayment();
+			//交款退回业务与交款业务同时开启
+			cancelOrdderBusiness.cancelOrder();
 		}
 		if(ConstantUtil.qryApplyFlag.trim().equals("Enabled")){
 			qryApplyBussiness.makeQryApply();

@@ -20,6 +20,7 @@ import com.poka.app.util.CxfUtil;
 
 /**
  * 横向调拨业务类
+ * 
  * @author Administrator
  *
  */
@@ -70,7 +71,7 @@ public class BagInfoBusiness {
 			cxfUtil.recieveTimeOutWrapper(service);
 			boolean result = Boolean.FALSE;
 			result = service.getTransferFlag("bagInfo");
-			if(result){
+			if (result) {
 				logger.info("横向调拨订单号：" + orderId + "，共计" + list.size() + "条");
 				result = service.sendBagInfo(list);
 				if (result) {
@@ -96,5 +97,18 @@ public class BagInfoBusiness {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public boolean insertBagInfo(List<BagInfo> bagInfoList) {
+		int listSize = bagInfoList.size();
+		if (listSize <= 0 || null == bagInfoList) {
+			return false;
+		} else {
+			for (BagInfo bagInfo : bagInfoList) {
+				bagInfoService.save(bagInfo);
+			}
+		}
+		logger.info(" 数据同步成功(" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + ")");
+		return true;
 	}
 }

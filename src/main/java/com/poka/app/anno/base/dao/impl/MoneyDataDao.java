@@ -49,7 +49,8 @@ public class MoneyDataDao implements IMoneyDataDao {
 		String formatType = "TO_CHAR(A.coltime,'YYYY-MM-DD HH24:MI:SS') as OperDate,";
 		return formatType;
 	}
-
+	
+	/**
 	@Override
 	public List<MoneyDataInfo> findMoneyDataList(String mon) throws Exception {
 		if (mon == null) {
@@ -78,17 +79,59 @@ public class MoneyDataDao implements IMoneyDataDao {
 		return query(sql,mon);
 
 	}
+	*/
+	
+	/**
+	 * 2017年10月12日
+	 * 修改冠字号查询sql
+	 */
+	@Override
+	public List<MoneyDataInfo> findMoneyDataList(String mon) throws Exception {
+		if (mon == null) {
+			throw new Exception();
+		}
+		String sql = "select t1.*,t2.bankname, t3.bankname as branchname,"
+				+ "case t4.pertype when '00' then '点钞机' "
+				+ "when '01' then 'ATM机' "
+				+ "when '02' then '清分机' "
+				+ "when '03' then '存取款一体机' "
+				+ "else '其它' "
+				+ "end as pertype from "
+				+ "(select A.mon,A.monval,A.monver,"
+				+ getFormatType()
+				+ "A.percode,A.bankno,A.agencyno,A.imagepath,"
+				+ "case when B.packageid is not null then '清分' "
+				+ "else '清点' end businesstype  "
+				+ "from MONEYDATA A left join PACKAGEINFO B "
+				+ "on A.bundleid=B.bundleid "
+				+ "where A.mon=? union all "
+				+ "select A.MON,to_char(A.monval),A.monver,"
+				+ getFormatType()
+				+ "A.percode,A.bankno,A.agencyno,A.imagepath,"
+				+ " case A.businesstype when '1' then '存款' when '2' then '取款' when '3' then '取款回收' when '4' then '存款回收' end as businesstype"
+				+ " from MONEYDATA_ATM A where A.mon=? ) t1 "
+				+ "left join T_BANKANDNET t2 on t1.bankno=t2.bankid"
+				+ " left join T_BANKANDNET t3 on t1.agencyno=t3.bankid"
+				+ " left join PERINFO t4 on t1.percode=t4.percode"
+				+ " and t1.bankno=t4.bankno"
+				+ " and t1.agencyno=t4.agencyno"
+				+ " order by t1.operdate desc"; 
+
+		return query(sql,mon);
+
+	}
+	
     public List<MoneyDataInfo> query(String sql,String mon){
     	SQLQuery query = getSession().createSQLQuery(sql);
 		query.setString(0, mon);
+		query.setString(1, mon);
 		query.addScalar("percode", StandardBasicTypes.STRING);
+		query.addScalar("pertype", StandardBasicTypes.STRING);
 		query.addScalar("operdate", StandardBasicTypes.STRING);
 		query.addScalar("mon", StandardBasicTypes.STRING);
 		query.addScalar("monval", StandardBasicTypes.STRING);
 		query.addScalar("monver", StandardBasicTypes.STRING);
-		query.addScalar("bundleid", StandardBasicTypes.STRING);
 		query.addScalar("imagepath", StandardBasicTypes.STRING);
-		query.addScalar("ipaddr", StandardBasicTypes.STRING);
 		query.addScalar("businesstype", StandardBasicTypes.STRING);
 		query.addScalar("bankno", StandardBasicTypes.STRING);
 		query.addScalar("bankname", StandardBasicTypes.STRING);
@@ -99,22 +142,22 @@ public class MoneyDataDao implements IMoneyDataDao {
 		for (Object[] ob : list) {
 			MoneyDataInfo mo = new MoneyDataInfo();
 			mo.setPercode((String) ob[0]);
-			mo.setOperdate((String)ob[1]);
-			mo.setMon((String)ob[2]);
-			mo.setMonval((String)ob[3]);
-			mo.setMonver((String)ob[4]);
-			mo.setBundleid((String)ob[5]);
-			if(null !=(String)ob[6]||"".equals((String)ob[6])){
-				mo.setImagepath(GetImageStr((String)ob[6]));
-			}else {
+			mo.setPertype((String) ob[1]);
+			mo.setOperdate((String)ob[2]);
+			mo.setMon((String)ob[3]);
+			mo.setMonval((String)ob[4]);
+			mo.setMonver((String)ob[5]);
+			//图片直接返回路径，不转换为字节数组格式
+//			if(null !=(String)ob[6]||"".equals((String)ob[6])){
+//				mo.setImagepath(GetImageStr((String)ob[6]));
+//			}else {
 				mo.setImagepath((String)ob[6]);
-			}
-			mo.setIpaddr((String)ob[7]);
-			mo.setBusinesstype((String)ob[8]);
-			mo.setBankno((String)ob[9]);
-			mo.setBankname((String)ob[10]);
-			mo.setAgencyno((String)ob[11]);
-			mo.setBranchname((String)ob[12]);
+//			}
+			mo.setBusinesstype((String)ob[7]);
+			mo.setBankno((String)ob[8]);
+			mo.setBankname((String)ob[9]);
+			mo.setAgencyno((String)ob[10]);
+			mo.setBranchname((String)ob[11]);
 			monDataInfos.add(mo);
 		}
 		return monDataInfos;
@@ -137,6 +180,7 @@ public class MoneyDataDao implements IMoneyDataDao {
 		return new String(Base64.encodeBase64(data));// 返回Base64编码过的字节数组字符串
 	}
 
+	/**
 	@Override
 	public List<MoneyDataInfo> findMoneyDataListByLike(String mon)
 			throws Exception {
@@ -165,7 +209,48 @@ public class MoneyDataDao implements IMoneyDataDao {
 				+ " ) T" + " order by OperDate asc";
 		return query(sql,mon);
 	}
+	*/
 
+	/**
+	 * 2017年10月12日
+	 * 修改模糊查询sql
+	 */
+	@Override
+	public List<MoneyDataInfo> findMoneyDataListByLike(String mon)
+			throws Exception {
+		if (mon == null) {
+			throw new Exception();
+		}
+		String sql = "select t1.*,t2.bankname, t3.bankname as branchname,"
+				+ "case t4.pertype when '00' then '点钞机' "
+				+ "when '01' then 'ATM机' "
+				+ "when '02' then '清分机' "
+				+ "when '03' then '存取款一体机' "
+				+ "else '其它' "
+				+ "end as pertype from "
+				+ "(select A.mon,A.monval,A.monver,"
+				+ getFormatType()
+				+ "A.percode,A.bankno,A.agencyno,A.imagepath,"
+				+ "case when B.packageid is not null then '清分' "
+				+ "else '清点' end businesstype  "
+				+ "from MONEYDATA A left join PACKAGEINFO B "
+				+ "on A.bundleid=B.bundleid "
+				+ "where A.mon like ? union all "
+				+ "select A.MON,to_char(A.monval),A.monver,"
+				+ getFormatType()
+				+ "A.percode,A.bankno,A.agencyno,A.imagepath,"
+				+ " case A.businesstype when '1' then '存款' when '2' then '取款' when '3' then '取款回收' when '4' then '存款回收' end as businesstype"
+				+ " from MONEYDATA_ATM A where A.mon like ? ) t1 "
+				+ "left join T_BANKANDNET t2 on t1.bankno=t2.bankid"
+				+ " left join T_BANKANDNET t3 on t1.agencyno=t3.bankid"
+				+ " left join PERINFO t4 on t1.percode=t4.percode"
+				+ " and t1.bankno=t4.bankno"
+				+ " and t1.agencyno=t4.agencyno"
+				+ " order by t1.operdate desc"; 
+		
+		return query(sql,mon);
+	}
+	
 	@Override
 	public List<MoneyDataInfo> findMoneyDataListPage(String page, String rows,
 			String dealNo) throws Exception {

@@ -232,6 +232,7 @@ public class BaseDao<T, PK extends Serializable> implements IBaseDao<T, PK> {
 	 * @return 更新记录数.
 	 */
 	public int batchExecute(final String hql, final Map<String, ?> values) {
+		//返回操作成功的条数
 		return createQuery(hql, values).executeUpdate();
 	}
 
